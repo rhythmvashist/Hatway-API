@@ -34,6 +34,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./",\
           "packageDependencies": [\
             ["axios", "npm:0.27.2"],\
+            ["body-parser", "npm:1.20.0"],\
             ["express", "npm:4.18.1"],\
             ["nodemon", "npm:2.0.16"]\
           ],\
@@ -1205,6 +1206,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["hathway", "workspace:."],\
             ["axios", "npm:0.27.2"],\
+            ["body-parser", "npm:1.20.0"],\
             ["express", "npm:4.18.1"],\
             ["nodemon", "npm:2.0.16"]\
           ],\
