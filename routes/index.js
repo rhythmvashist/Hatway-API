@@ -5,7 +5,7 @@ const config = require("../config");
 const {
   checkIsSort,
   checkDirection,
-  removeDuplicate,
+  SortByAndOrderByProperty,
 } = require("../utils/helper");
 
 router.get("/api/ping", (req, res) => {
@@ -34,7 +34,6 @@ router.get("/api/posts", async (req, res) => {
   let holder = {};
   let output = [];
 
-
   // make concurrent api calls
   const requests = tagList.map((tag) =>
     axios.get(`${config.BASE_URL}?tag=${tag}`)
@@ -44,7 +43,6 @@ router.get("/api/posts", async (req, res) => {
     // wait until all the api calls resolves
     const result = await Promise.all(requests);
     result.map((postData) => {
-
       // filter the response to ensure no duplicate post is sent back to the client
       postData.data.posts.forEach((post) => {
         if (!holder[post.id]) {
@@ -53,7 +51,9 @@ router.get("/api/posts", async (req, res) => {
         }
       });
     });
-    
+
+    // Sort and arrange the post according to the SortBy and direction parameter passed by the client
+    output = SortByAndOrderByProperty(output, sortBy, direction);
     return res.send({ posts: output });
   } catch (err) {
     res.status(500).json({ error: String(err) });

@@ -1,3 +1,12 @@
+exports.SortByAndOrderByProperty = (posts, property, direction) => {
+  if (direction == "asc") {
+    posts.sort((a, b) => (a[`${property}`] > b[`${property}`] ? 1 : -1));
+  } else {
+    posts.sort((a, b) => (a[`${property}`] > b[`${property}`] ? -1 : 1));
+  }
+  return posts;
+};
+
 exports.checkIsSort = (param) => {
   const allowedParams = ["id", "reads", "likes", "popularity"];
 
@@ -16,5 +25,3 @@ exports.checkDirection = (param) => {
 
   return false;
 };
-
-exports.removeDuplicate = (holder, posts) => {};

@@ -14,7 +14,9 @@ app.use(express.json());
 app.use("/", routes);
 
 app.get("/", (req, res) => {
-  res.send("Hello World checking!");
+  res
+    .status(200)
+    .send({ message: "please redirect api calls to /api/ endpoint" });
 });
 
 app.listen(config.PORT, () => {
