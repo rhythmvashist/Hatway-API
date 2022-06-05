@@ -81,7 +81,7 @@ describe("Testing different variations of /api/post", () => {
       });
   });
 
-  it("Ensure post array contains correct", () => {
+  it("Ensure post array contains correct blogpost properties", () => {
     return request(server)
       .get("/api/posts?tag=tech,design")
       .expect(200)
@@ -89,14 +89,12 @@ describe("Testing different variations of /api/post", () => {
         expect(response.body.posts[0]).toEqual(
           expect.objectContaining({
             author: expect.any(String),
-            id:expect.any(Number),
-            reads:expect.any(Number),
-            tags:expect.any(Array),
-            likes:expect.any(Number)
-            
+            id: expect.any(Number),
+            reads: expect.any(Number),
+            tags: expect.any(Array),
+            likes: expect.any(Number),
           })
         );
-        
       });
   });
 });
