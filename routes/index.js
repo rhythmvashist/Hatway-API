@@ -8,28 +8,32 @@ const {
   SortByAndOrderByProperty,
 } = require("../utils/helper");
 
+// Routing the /api/ping call
 router.get("/api/ping", (req, res) => {
   res.status(200).send({ success: true });
 });
 
+// routing the /api/post acall
 router.get("/api/posts", async (req, res) => {
   const tags = req.query.tag;
   const sortBy = req.query.sortBy || "id";
   const direction = req.query.direction || "asc";
 
+
+  // check all query params passed by the client are valid
   if (!tags) {
-    res.status(400).send({ error: "Tags parameter is required" });
+    return res.status(400).send({ error: "Tags parameter is required" });
   }
 
   if (!checkIsSort(sortBy)) {
-    res.status(400).send({ error: "sortBy parameter is invalid" });
+    return res.status(400).send({ error: "sortBy parameter is invalid" });
   }
 
   if (!checkDirection(direction)) {
-    res.status(400).send({ error: "direction parameter is invalid" });
+    return res.status(400).send({ error: "direction parameter is invalid" });
   }
 
-  //
+  //if user passed multiple tags split the string into
   const tagList = tags.split(",");
   let holder = {};
   let output = [];
@@ -56,7 +60,8 @@ router.get("/api/posts", async (req, res) => {
     output = SortByAndOrderByProperty(output, sortBy, direction);
     return res.send({ posts: output });
   } catch (err) {
-    res.status(500).json({ error: String(err) });
+    // Catch exception if any concurrent calls goes wrong
+    return res.status(500).json({ error: String(err) });
   }
 });
 

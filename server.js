@@ -22,3 +22,5 @@ app.get("/", (req, res) => {
 app.listen(config.PORT, () => {
   console.log(`Example app listening at http://localhost:${config.PORT}`);
 });
+
+module.exports = app;
