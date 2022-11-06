@@ -1,6 +1,6 @@
 # hathway Back-end challenge
 
-Worked on this project over the weekend (MON-FRIDAY job)
+Worked on this project over the weekend
 
 - Used Nodejs, express to implement the api
 - Used Supertest and Jest to write test for the API's
